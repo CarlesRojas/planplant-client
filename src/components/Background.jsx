@@ -1,5 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 import { animated, useSpring } from "react-spring";
+
+// Contexts
+import { Utils } from "contexts/Utils";
 
 // Constants
 const GRADIENTS = {
@@ -12,12 +15,15 @@ export default function Background() {
     // Print Render
     if (process.env.REACT_APP_DEBUGG === "true" && process.env.NODE_ENV !== "production") console.log("%cRender Background", "color: grey; font-size: 11px");
 
+    // Contexts
+    const { getCookie } = useContext(Utils);
+
     // #################################################
     //   BACKGROUND LOGIC
     // #################################################
 
     // Current background
-    const currGradient = useRef("turquoise");
+    const currGradient = useRef(getCookie("planPlant_token") ? "turquoise" : "orange");
 
     // Spring
     const [{ background }, setGradient] = useSpring(() => ({
