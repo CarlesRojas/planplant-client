@@ -1,0 +1,46 @@
+{
+    "name": "planplant",
+    "version": "0.1.0",
+    "homepage": ".",
+    "private": true,
+    "dependencies": {
+        "classnames": "^2.2.6",
+        "geolib": "^3.3.1",
+        "gsap": "^3.6.0",
+        "node-sass": "^4.14.1",
+        "react": "^16.13.1",
+        "react-device-detect": "^1.15.0",
+        "react-dom": "^16.13.1",
+        "react-inlinesvg": "^2.1.1",
+        "react-router-dom": "^5.2.0",
+        "react-scripts": "3.4.3",
+        "react-spring": "^9.0.0-rc.3",
+        "react-use-gesture": "^7.0.16",
+        "react-webcam": "^5.2.2"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "ngrok": "./ngrok.exe http 3000 --region=eu"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    }
+}

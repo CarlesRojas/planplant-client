@@ -1,0 +1,823 @@
+// #######################################
+//      FONTS
+// #######################################
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&display=swap");
+
+// #######################################
+//      VARIABLES
+// #######################################
+
+$background: rgb(220, 220, 220);
+$text: rgba(0, 0, 0, 0.7);
+
+$font-size: 18px;
+$line-height: 22px;
+
+// #######################################
+//      MIXINS
+// #######################################
+
+@mixin transition($x...) {
+    -webkit-transition: $x;
+    -moz-transition: $x;
+    -ms-transition: $x;
+    -o-transition: $x;
+    transition: $x;
+}
+
+@mixin transition-delay($delay) {
+    -webkit-transition-delay: $delay;
+    -moz-transition-delay: $delay;
+    -ms-transition-delay: $delay;
+    -o-transition-delay: $delay;
+    transition-delay: $delay;
+}
+
+@mixin calc($property, $expression) {
+    #{$property}: -webkit-calc(#{$expression});
+    #{$property}: -moz-calc(#{$expression});
+    #{$property}: -ms-calc(#{$expression});
+    #{$property}: -o-calc(#{$expression});
+    #{$property}: calc(#{$expression});
+}
+
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    -o-border-radius: $radius;
+    border-radius: $radius;
+}
+
+@mixin box-shadow($value) {
+    -webkit-box-shadow: $value;
+    -moz-box-shadow: $value;
+    -ms-box-shadow: $value;
+    -o-box-shadow: $value;
+    box-shadow: $value;
+}
+
+@mixin filter($value) {
+    -webkit-filter: $value;
+    -moz-filter: $value;
+    -ms-filter: $value;
+    -o-filter: $value;
+    filter: $value;
+}
+
+@mixin animation($animation) {
+    -webkit-animation: $animation;
+    -moz-animation: $animation;
+    -ms-animation: $animation;
+    -o-animation: $animation;
+    animation: $animation;
+}
+
+@mixin animation-delay($delay) {
+    -webkit-animation-delay: $delay;
+    -moz-animation-delay: $delay;
+    -ms-animation-delay: $delay;
+    -o-animation-delay: $delay;
+    animation-delay: $delay;
+}
+
+@mixin touch-action($value) {
+    -webkit-touch-action: $value;
+    -moz-touch-action: $value;
+    -ms-touch-action: $value;
+    -o-touch-action: $value;
+    touch-action: $value;
+}
+
+@mixin inputPlaceholder() {
+    $selector: "";
+    $prefixes: (
+        moz: "::-moz",
+        webkit: "::-webkit",
+        ie: ":-ms",
+    );
+    @each $prop, $value in $prefixes {
+        @if $prop != "moz" {
+            $selector: #{$value}-input-placeholder;
+        } @else {
+            $selector: #{$value}-placeholder;
+        }
+        @if & {
+            &#{$selector} {
+                @content;
+            }
+        } @else {
+            #{$selector} {
+                @content;
+            }
+        }
+    }
+    &::placeholder {
+        @content;
+    }
+}
+
+// #######################################
+//      MAIN ELEMENTS
+// #######################################
+
+* {
+    overflow: hidden;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", sans-serif;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    overscroll-behavior: none;
+}
+
+html {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    font-size: $font-size;
+    @include touch-action(none);
+}
+
+body {
+    user-select: none;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+
+    font-family: "Montserrat", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    @include touch-action(none);
+}
+
+#root {
+    height: 100%;
+    width: 100%;
+    background-color: $background;
+    color: $text;
+}
+
+// Autofill color
+:-webkit-autofill,
+:-webkit-autofill:hover,
+:-webkit-autofill:focus {
+    transition: background-color 10000s;
+    width: inherit;
+    box-sizing: border-box;
+    border: 0px solid rgba(255, 255, 255, 0);
+    border-radius: 1000px;
+    padding: 0 10px;
+    -webkit-text-fill-color: white;
+}
+
+// #######################################
+//      APP
+// #######################################
+
+.app {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+// ##############################################################################
+// ##############################################################################
+//      PAGES
+// ##############################################################################
+// ##############################################################################
+
+// #######################################
+//      LANDING
+// #######################################
+
+.landing {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+// #######################################
+//      AUTH
+// #######################################
+
+.auth {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+// #######################################
+//      HOME
+// #######################################
+
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        z-index: 1;
+    }
+}
+
+// #######################################
+//      SETTINGS
+// #######################################
+
+.settings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+
+    .container {
+        position: relative;
+        flex-grow: 1;
+        height: 100%;
+        width: 100%;
+
+        .settingsIcon {
+            width: 25%;
+            z-index: 1;
+            color: white;
+            margin: 8% 0 5% 0;
+        }
+
+        .overflowContainer {
+            position: relative;
+            flex-grow: 1;
+            height: 100%;
+            width: 100%;
+            overflow-y: scroll;
+
+            .settingsContainer {
+                position: relative;
+                // background-color: red;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+            }
+        }
+    }
+}
+
+// ##############################################################################
+// ##############################################################################
+//      COMPONENTS
+// ##############################################################################
+// ##############################################################################
+
+// #######################################
+//      SECTION
+// #######################################
+
+.section {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+
+    .profileImage {
+        height: 30vw;
+        width: 30vw;
+        color: transparent;
+        margin: 15% 0 8% 0;
+        @include border-radius(100vh);
+        @include box-shadow(5px 5px 15px rgba(0, 0, 0, 0.1));
+        @include transition(transform 0.2s ease-in-out);
+
+        &:active {
+            transform: scale(1.05);
+        }
+    }
+
+    .placeholderContainer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 30vw;
+        width: 30vw;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 75%);
+        background-position: 50px -150px;
+        margin: 15% 0 8% 0;
+        border: solid 1px rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(5px);
+        @include border-radius(100vh);
+        @include box-shadow(5px 5px 15px rgba(0, 0, 0, 0.1));
+
+        .profileImagePlaceholder {
+            height: 15vw;
+            max-height: 15vw;
+            min-height: 15vw;
+            width: 15vw;
+            max-width: 15vw;
+            min-width: 15vw;
+            color: white;
+        }
+    }
+
+    .webcam {
+        height: 70vw;
+        width: 70vw;
+        margin: 15%;
+        @include border-radius(100vh);
+        @include box-shadow(5px 5px 15px rgba(0, 0, 0, 0.1));
+    }
+
+    .camControls {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+        margin-bottom: 1rem;
+        padding: 0.5rem;
+
+        .camButton {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 75%);
+            background-position: 50px -150px;
+            border: solid 1px rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            @include border-radius(100vh);
+            @include transition(transform 0.2s ease-in-out);
+            @include box-shadow(5px 5px 15px rgba(0, 0, 0, 0.1));
+
+            &:active {
+                transform: scale(1.05);
+            }
+
+            &.disabled {
+                pointer-events: none;
+            }
+
+            .camIcon {
+                height: 3.5rem;
+                max-height: 3.5rem;
+                min-height: 3.5rem;
+                width: 3.5rem;
+                max-width: 3.5rem;
+                min-width: 3.5rem;
+                color: white;
+                opacity: 0.8;
+                padding: 1rem;
+            }
+        }
+
+        .camControlIcon {
+            height: 3.5rem;
+            max-height: 3.5rem;
+            min-height: 3.5rem;
+            width: 3.5rem;
+            max-width: 3.5rem;
+            min-width: 3.5rem;
+            color: white;
+            opacity: 0.8;
+            margin: 0 10%;
+            padding: 1rem;
+            @include transition(transform 0.2s ease-in-out);
+
+            &:active {
+                transform: scale(1.05);
+            }
+
+            &.disabled {
+                pointer-events: none;
+                opacity: 0;
+            }
+        }
+
+        .inputImage {
+            display: none;
+        }
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+
+        .inputContainer {
+            display: flex;
+            align-items: center;
+            width: 85%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 75%);
+            background-position: 50px -150px;
+            margin: 0 5%;
+            margin-bottom: 8%;
+            border: solid 2px transparent;
+            padding: 14px;
+            backdrop-filter: blur(6px);
+            @include box-shadow(5px 5px 15px rgba(0, 0, 0, 0.1));
+            @include border-radius(500px);
+
+            .inputIcon {
+                height: 1rem;
+                max-height: 1rem;
+                min-height: 1rem;
+                width: 1rem;
+                max-width: 1rem;
+                min-width: 1rem;
+                color: white;
+                opacity: 0.5;
+                margin-right: 0.4rem;
+
+                &.email {
+                    height: 1.05rem;
+                    max-height: 1.05rem;
+                    min-height: 1.05rem;
+                    width: 1.05rem;
+                    max-width: 1.05rem;
+                    min-width: 1.05rem;
+                }
+            }
+
+            .input {
+                display: flex;
+                align-items: center;
+                background: none;
+                color: white;
+                border: 0;
+                outline: none;
+                font-size: 1rem;
+
+                @include inputPlaceholder() {
+                    color: white;
+                    opacity: 0.4;
+                }
+            }
+        }
+    }
+
+    .error {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 2.7em;
+        width: 85%;
+        color: rgb(146, 0, 0);
+        margin-bottom: 5%;
+        font-size: 0.8em;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .success {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 2.7em;
+        width: 85%;
+        color: rgb(255, 255, 255);
+        margin-bottom: 5%;
+        font-size: 0.8em;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .loadingIcon {
+        width: 25%;
+        z-index: 1;
+        color: white;
+        @include animation(heartbeat 2s linear infinite);
+
+        @keyframes heartbeat {
+            10% {
+                transform: scale(1);
+            }
+            20% {
+                transform: scale(1.1);
+            }
+            30% {
+                transform: scale(1);
+            }
+            35% {
+                transform: scale(1);
+            }
+            45% {
+                transform: scale(1.1);
+            }
+            55% {
+                transform: scale(1);
+            }
+        }
+    }
+
+    &.loading {
+        &.loadingSectionAnim {
+            @include animation(fadeIn 1s linear);
+
+            @keyframes fadeIn {
+                0% {
+                    opacity: 0;
+                }
+                80% {
+                    opacity: 0;
+                }
+                100% {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
+
+// #######################################
+//      NAVBAR
+// #######################################
+
+.navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 3rem;
+    width: 100%;
+    z-index: 5;
+    @include transition(height 0.5s ease-in-out);
+
+    .navbarLogo {
+        color: white;
+        height: 3rem;
+        max-height: 3rem;
+        min-height: 3rem;
+        padding: 0.6rem;
+    }
+
+    .clickToClose {
+        pointer-events: none;
+        position: absolute;
+        display: none;
+        height: 100vh;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 50;
+
+        &.active {
+            pointer-events: all;
+            display: block;
+        }
+    }
+
+    .navbarButton {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 0rem;
+        width: 100%;
+    }
+}
+
+// #######################################
+//      BACKGROUND
+// #######################################
+
+.background {
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+// #######################################
+//      GLASS
+// #######################################
+
+.glass {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 75%);
+    background-position: 50px -150px;
+    border: solid 1px rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(5px);
+    @include box-shadow(5px 5px 15px rgba(0, 0, 0, 0.1));
+    @include border-radius(20px);
+
+    &.clickable {
+        @include transition(transform 0.2s ease-in-out);
+
+        &:active {
+            transform: scale(1.05);
+        }
+    }
+}
+
+// #######################################
+//      BUTTON
+// #######################################
+
+.button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 50px;
+    width: 85%;
+    z-index: 1;
+    cursor: pointer;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.5) 75%);
+    background-position: 50px -150px;
+    color: $text;
+    margin-bottom: 8%;
+    border: solid 2px transparent;
+    border: 0;
+    outline: none;
+    padding: 14px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    backdrop-filter: blur(6px);
+    -webkit-tap-highlight-color: transparent;
+    @include box-shadow(5px 5px 15px rgba(0, 0, 0, 0.1));
+    @include border-radius(500px);
+    @include transition(transform 0.2s ease-in-out);
+
+    &:active {
+        transform: scale(1.05);
+    }
+
+    &.lower {
+        background: transparent;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 75%);
+        color: white;
+        margin-bottom: 15%;
+    }
+
+    &.closer {
+        margin-bottom: 4%;
+    }
+
+    &.thinner {
+        padding: 3% 4%;
+        font-size: 0.9rem;
+        @include box-shadow(5px 5px 10px rgba(0, 0, 0, 0.1));
+    }
+
+    &.inactive {
+        pointer-events: none;
+    }
+
+    &.red {
+        background: radial-gradient(circle, rgba(255, 52, 0, 0.6) 0%, rgba(255, 52, 0, 0.5) 75%);
+    }
+}
+
+// #######################################
+//      BACK BUTTON
+// #######################################
+
+.backButton {
+    position: absolute;
+    height: 3rem;
+    max-height: 3rem;
+    min-height: 3rem;
+    width: 3rem;
+    max-width: 3rem;
+    min-width: 3rem;
+    top: 0;
+    left: 0;
+    color: white;
+    opacity: 0.7;
+    padding: 0.8rem;
+}
+
+// #######################################
+//      SETTINGS BUTTON
+// #######################################
+
+.settingsButton {
+    position: absolute;
+    height: 3rem;
+    max-height: 3rem;
+    min-height: 3rem;
+    width: 3rem;
+    max-width: 3rem;
+    min-width: 3rem;
+    top: 0;
+    right: 0;
+    color: white;
+    opacity: 0.8;
+    padding: 0.8rem;
+}
+
+// #######################################
+//      LOGO
+// #######################################
+
+.logo {
+    width: 40%;
+    z-index: 1;
+    color: white;
+    margin: 15% 0 25% 0;
+    @include animation(heartbeat 3s linear infinite);
+
+    @keyframes heartbeat {
+        58% {
+            transform: scale(1);
+        }
+        63% {
+            transform: scale(1.1);
+        }
+        68% {
+            transform: scale(1);
+        }
+        70% {
+            transform: scale(1);
+        }
+        75% {
+            transform: scale(1.1);
+        }
+        80% {
+            transform: scale(1);
+        }
+    }
+
+    &.small {
+        width: 25%;
+        margin: 8% 0 15% 0;
+    }
+}
+
+// #######################################
+//      SETTING
+// #######################################
+
+.setting {
+    position: relative;
+    height: fit-content;
+    width: 85%;
+    margin-bottom: 4%;
+    @include box-shadow(5px 5px 15px rgba(0, 0, 0, 0.1));
+    @include border-radius(500px);
+    @include transition(transform 0.2s ease-in-out);
+
+    .backGradient {
+        pointer-events: none;
+        height: 100%;
+        width: 100%;
+        //background: radial-gradient(circle, #1eff00b3 0%, #00c53180 75%);
+        //background: radial-gradient(circle, #ff3300b3 0%, #c51e0080 75%);
+        color: transparent;
+        padding: 14px;
+        font-size: 1rem;
+        backdrop-filter: blur(6px);
+        @include border-radius(500px);
+    }
+
+    .slider {
+        pointer-events: all;
+        position: absolute;
+        width: 80%;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        cursor: pointer;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.3) 75%);
+        background-position: 50px -150px;
+        color: $text;
+        border: solid 2px transparent;
+        border: 0;
+        outline: none;
+        padding: 14px;
+        font-size: 1rem;
+        font-weight: 700;
+        text-align: center;
+        text-transform: uppercase;
+        backdrop-filter: blur(6px);
+        -webkit-tap-highlight-color: transparent;
+        @include box-shadow(0 0 15px rgba(0, 0, 0, 0.1));
+        @include border-radius(500px);
+    }
+}
