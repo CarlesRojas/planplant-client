@@ -7,6 +7,7 @@ import { Utils } from "contexts/Utils";
 // Constants
 const GRADIENTS = {
     turquoise: ["#2192bf", "#02f8ab"],
+    lime: ["#1f6a1f", "#f8ff61"],
     purple: ["#b758f4", "#2192bf"],
     orange: ["#f4a658", "#f46b6b"],
 };
@@ -23,7 +24,7 @@ export default function Background() {
     // #################################################
 
     // Current background
-    const currGradient = useRef(getCookie("planPlant_token") ? "turquoise" : "orange");
+    const currGradient = useRef(getCookie("planPlant_token") ? "turquoise" : "lime");
 
     // Spring
     const [{ background }, setGradient] = useSpring(() => ({
@@ -59,5 +60,10 @@ export default function Background() {
     //   RENDER
     // #################################################
 
-    return <animated.div className="background" style={{ backgroundImage: background }} />;
+    return (
+        <div className="background">
+            <animated.div className="color" style={{ backgroundImage: background }}></animated.div>
+            <div className="image"></div>
+        </div>
+    );
 }

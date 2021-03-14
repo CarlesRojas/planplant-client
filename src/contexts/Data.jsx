@@ -9,13 +9,17 @@ const DataProvider = (props) => {
 
     // USER
     const token = useRef(null);
-    const username = useRef(null);
+    const userName = useRef(null);
     const userID = useRef(null);
     const image = useRef(null);
     const settings = useRef({ vibrate: true });
+    const homeName = useRef(null);
+
+    // BACK BUTTON HANDLE
+    const mostAdvancedRoute = useRef("home");
 
     // ROOM
-    const [roomID, setRoomID] = useState(null);
+    const [homeID, setHomeID] = useState(null);
 
     return (
         <Data.Provider
@@ -25,14 +29,18 @@ const DataProvider = (props) => {
 
                 // USER
                 token,
-                username,
+                userName,
                 userID,
                 image,
                 settings,
+                homeName,
+
+                // BACK BUTTON HANDLE
+                mostAdvancedRoute,
 
                 // ROOM
-                roomID,
-                setRoomID,
+                homeID,
+                setHomeID,
             }}
         >
             {props.children}

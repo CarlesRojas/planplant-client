@@ -50,7 +50,7 @@ export default function Auth() {
 
     // Form states
     const [loginForm, setLoginForm] = useState({ email: "", password: "" });
-    const [signupForm, setSingupForm] = useState({ username: "", email: "", password: "", image: "" });
+    const [signupForm, setSingupForm] = useState({ userName: "", email: "", password: "", image: "" });
     const [loginError, setLoginError] = useState(null);
     const [signUpError, setSignUpError] = useState(null);
     const [camError, setCamError] = useState(null);
@@ -100,7 +100,7 @@ export default function Auth() {
         showLoadingScreen();
 
         // Sign Up
-        const singUpResult = await register(signupForm.username, signupForm.email, signupForm.password, signupForm.image);
+        const singUpResult = await register(signupForm.userName, signupForm.email, signupForm.password, signupForm.image);
 
         // Throw error
         if ("error" in singUpResult) {
@@ -205,7 +205,7 @@ export default function Auth() {
         setLoginError(null);
         setSignUpError(null);
         setLoginForm({ email: "", password: "" });
-        setSingupForm({ username: "", email: "", password: "", image: "" });
+        setSingupForm({ userName: "", email: "", password: "", image: "" });
     };
 
     // #################################################
@@ -316,7 +316,7 @@ export default function Auth() {
     // On componente mount
     useEffect(() => {
         // Change Background Color
-        window.PubSub.emit("onGradientChange", { gradientName: "orange" });
+        window.PubSub.emit("onGradientChange", { gradientName: "lime" });
 
         // Get number of cameras
         const getNumCams = async () => {
@@ -426,12 +426,28 @@ export default function Auth() {
                     <form autoComplete="off" noValidate spellCheck="false" onSubmit={onSignUp}>
                         <div className="inputContainer">
                             <SVG className="inputIcon email" src={UserIcon} />
-                            <input className="input" type="text" placeholder=" name" name="username" value={signupForm.username} onChange={onSingupFormChange} autoComplete="off"></input>
+                            <input
+                                className="input"
+                                type="text"
+                                placeholder=" name"
+                                name="userName"
+                                value={signupForm.userName}
+                                onChange={onSingupFormChange}
+                                autoComplete="new-password"
+                            ></input>
                         </div>
 
                         <div className="inputContainer">
                             <SVG className="inputIcon email" src={EmailIcon} />
-                            <input className="input email" type="email" placeholder=" email" name="email" value={signupForm.email} onChange={onSingupFormChange} autoComplete="off"></input>
+                            <input
+                                className="input email"
+                                type="email"
+                                placeholder=" email"
+                                name="email"
+                                value={signupForm.email}
+                                onChange={onSingupFormChange}
+                                autoComplete="new-password"
+                            ></input>
                         </div>
 
                         <div className="inputContainer">
@@ -443,7 +459,7 @@ export default function Auth() {
                                 name="password"
                                 value={signupForm.password}
                                 onChange={onSingupFormChange}
-                                autoComplete="off"
+                                autoComplete="new-password"
                             ></input>
                         </div>
 

@@ -37,7 +37,7 @@ export default function Settings() {
     // Contexts
     const { vibrate, cropAndResizeImage } = useContext(Utils);
     const { landingDone, settings } = useContext(Data);
-    const { logout, changeUsername, changeEmail, changePassword, changeImage, changeSettings, deleteAccount } = useContext(API);
+    const { logout, changeUserName, changeEmail, changePassword, changeImage, changeSettings, deleteAccount } = useContext(API);
 
     // Redirect state
     const [redirectTo, setRedirectTo] = useState(null);
@@ -50,14 +50,14 @@ export default function Settings() {
     // #################################################
 
     // Form states
-    const [changeUsernameForm, setChangeUsernameForm] = useState({ username: "", password: "" });
+    const [changeUserNameForm, setChangeUserNameForm] = useState({ userName: "", password: "" });
     const [changeEmailForm, setChangeEmailForm] = useState({ email: "", password: "" });
     const [changePasswordForm, setChangePasswordForm] = useState({ newPassword: "", password: "" });
     const [changeImageForm, setChangeImageForm] = useState({ image: "", password: "" });
     const [deleteAccountForm, setDeleteAccountForm] = useState({ password: "" });
 
     // Errors in forms
-    const [changeUsernameError, setChangeUsernameError] = useState(null);
+    const [changeUserNameError, setChangeUserNameError] = useState(null);
     const [changeEmailError, setChangeEmailError] = useState(null);
     const [changePasswordError, setChangePasswordError] = useState(null);
     const [changeImageError, setChangeImageError] = useState(null);
@@ -68,10 +68,10 @@ export default function Settings() {
     const [errorMessage, setErrorMessage] = useState(null);
     const [successMessage, setSuccessMessage] = useState(null);
 
-    // When the change username form changes
-    const onChangeUsernameFormChange = (event) => {
+    // When the change userName form changes
+    const onChangeUserNameFormChange = (event) => {
         const { name, value } = event.target;
-        setChangeUsernameForm((prevState) => ({ ...prevState, [name]: value }));
+        setChangeUserNameForm((prevState) => ({ ...prevState, [name]: value }));
     };
 
     // When the change email form changes
@@ -98,18 +98,18 @@ export default function Settings() {
         setDeleteAccountForm((prevState) => ({ ...prevState, [name]: value }));
     };
 
-    // When the users tries to change the username
-    const onChangeUsername = async (event) => {
+    // When the users tries to change the userName
+    const onChangeUserName = async (event) => {
         event.preventDefault();
 
         // Vibrate
         if (settings.current.vibrate) vibrate(25);
 
-        // Change Username
-        const result = await changeUsername(changeUsernameForm.password, changeUsernameForm.username);
+        // Change UserName
+        const result = await changeUserName(changeUserNameForm.password, changeUserNameForm.userName);
 
         // Throw error
-        if ("error" in result) setChangeUsernameError(result.error);
+        if ("error" in result) setChangeUserNameError(result.error);
         else {
             clearErrors();
             setSuccessMessage("User changed successfully");
@@ -217,14 +217,14 @@ export default function Settings() {
     //   PAGE NAVIGATION
     // #################################################
 
-    // Current page: "main" "changeUsername" "changeEmail" "changePassword" "changeImage" "deleteAccount" "camera"
+    // Current page: "main" "changeUserName" "changeEmail" "changePassword" "changeImage" "deleteAccount" "camera"
     const currPageRef = useRef("main");
     const [, setCurrPage] = useState("main");
 
     // Page position spring
     const [pagePositions, setPagePositions] = useSpring(() => ({
         mainX: 0,
-        changeUsernameX: SCREEN_WIDTH,
+        changeUserNameX: SCREEN_WIDTH,
         changeEmailX: SCREEN_WIDTH,
         changePasswordX: SCREEN_WIDTH,
         changeImageX: SCREEN_WIDTH,
@@ -240,7 +240,7 @@ export default function Settings() {
         resetForms();
         setPagePositions({
             mainX: 0,
-            changeUsernameX: SCREEN_WIDTH,
+            changeUserNameX: SCREEN_WIDTH,
             changeEmailX: SCREEN_WIDTH,
             changePasswordX: SCREEN_WIDTH,
             changeImageX: SCREEN_WIDTH,
@@ -251,8 +251,8 @@ export default function Settings() {
         setCurrPage("main");
     };
 
-    // Show the change username screen
-    const showChangeUsernameScreen = (keepForm) => {
+    // Show the change userName screen
+    const showChangeUserNameScreen = (keepForm) => {
         // Vibrate
         if (settings.current.vibrate) vibrate(25);
 
@@ -260,15 +260,15 @@ export default function Settings() {
         setSuccessMessage("");
         setPagePositions({
             mainX: -SCREEN_WIDTH,
-            changeUsernameX: 0,
+            changeUserNameX: 0,
             changeEmailX: SCREEN_WIDTH,
             changePasswordX: SCREEN_WIDTH,
             changeImageX: SCREEN_WIDTH,
             deleteAccountX: SCREEN_WIDTH,
             cameraX: SCREEN_WIDTH,
         });
-        currPageRef.current = "changeUsername";
-        setCurrPage("changeUsername");
+        currPageRef.current = "changeUserName";
+        setCurrPage("changeUserName");
     };
 
     // Show the change email screen
@@ -280,7 +280,7 @@ export default function Settings() {
         setSuccessMessage("");
         setPagePositions({
             mainX: -SCREEN_WIDTH,
-            changeUsernameX: SCREEN_WIDTH,
+            changeUserNameX: SCREEN_WIDTH,
             changeEmailX: 0,
             changePasswordX: SCREEN_WIDTH,
             changeImageX: SCREEN_WIDTH,
@@ -300,7 +300,7 @@ export default function Settings() {
         setSuccessMessage("");
         setPagePositions({
             mainX: -SCREEN_WIDTH,
-            changeUsernameX: SCREEN_WIDTH,
+            changeUserNameX: SCREEN_WIDTH,
             changeEmailX: SCREEN_WIDTH,
             changePasswordX: 0,
             changeImageX: SCREEN_WIDTH,
@@ -320,7 +320,7 @@ export default function Settings() {
         setSuccessMessage("");
         setPagePositions({
             mainX: -SCREEN_WIDTH,
-            changeUsernameX: SCREEN_WIDTH,
+            changeUserNameX: SCREEN_WIDTH,
             changeEmailX: SCREEN_WIDTH,
             changePasswordX: SCREEN_WIDTH,
             changeImageX: 0,
@@ -340,7 +340,7 @@ export default function Settings() {
         setSuccessMessage("");
         setPagePositions({
             mainX: -SCREEN_WIDTH,
-            changeUsernameX: SCREEN_WIDTH,
+            changeUserNameX: SCREEN_WIDTH,
             changeEmailX: SCREEN_WIDTH,
             changePasswordX: SCREEN_WIDTH,
             changeImageX: SCREEN_WIDTH,
@@ -358,7 +358,7 @@ export default function Settings() {
 
         setPagePositions({
             mainX: -SCREEN_WIDTH,
-            changeUsernameX: SCREEN_WIDTH,
+            changeUserNameX: SCREEN_WIDTH,
             changeEmailX: SCREEN_WIDTH,
             changePasswordX: SCREEN_WIDTH,
             changeImageX: -SCREEN_WIDTH,
@@ -371,7 +371,7 @@ export default function Settings() {
 
     // Reset all form fields
     const resetForms = () => {
-        setChangeUsernameForm({ username: "", password: "" });
+        setChangeUserNameForm({ userName: "", password: "" });
         setChangeEmailForm({ email: "", password: "" });
         setChangePasswordForm({ newPassword: "", password: "" });
         setChangeImageForm({ image: "", password: "" });
@@ -380,7 +380,7 @@ export default function Settings() {
 
     // Clear all errors
     const clearErrors = () => {
-        setChangeUsernameError(null);
+        setChangeUserNameError(null);
         setChangeEmailError(null);
         setChangePasswordError(null);
         setChangeImageError(null);
@@ -404,7 +404,7 @@ export default function Settings() {
 
             // Cancel gesture
             if (
-                currPageRef.current !== "changeUsername" &&
+                currPageRef.current !== "changeUserName" &&
                 currPageRef.current !== "changeEmail" &&
                 currPageRef.current !== "changePassword" &&
                 currPageRef.current !== "changeImage" &&
@@ -419,7 +419,7 @@ export default function Settings() {
             if (!down) {
                 if (currPageRef.current === "camera" && (mx > 100 || vx > 1)) showChangeImageScreen(true);
                 else if (mx > 100 || vx > 1) showMainScreen(false);
-                else if (currPageRef.current === "changeUsername") showChangeUsernameScreen(true);
+                else if (currPageRef.current === "changeUserName") showChangeUserNameScreen(true);
                 else if (currPageRef.current === "changeEmail") showChangeEmailScreen(true);
                 else if (currPageRef.current === "changePassword") showChangePasswordScreen(true);
                 else if (currPageRef.current === "changeImage") showChangeImageScreen(true);
@@ -430,10 +430,10 @@ export default function Settings() {
             // Update the position while the gesture is active
             else {
                 var displ = Math.max(mx, -20);
-                if (currPageRef.current === "changeUsername")
+                if (currPageRef.current === "changeUserName")
                     setPagePositions({
                         mainX: -SCREEN_WIDTH + displ,
-                        changeUsernameX: displ,
+                        changeUserNameX: displ,
                         changeEmailX: SCREEN_WIDTH,
                         changePasswordX: SCREEN_WIDTH,
                         changeImageX: SCREEN_WIDTH,
@@ -443,7 +443,7 @@ export default function Settings() {
                 else if (currPageRef.current === "changeEmail")
                     setPagePositions({
                         mainX: -SCREEN_WIDTH + displ,
-                        changeUsernameX: SCREEN_WIDTH,
+                        changeUserNameX: SCREEN_WIDTH,
                         changeEmailX: displ,
                         changePasswordX: SCREEN_WIDTH,
                         changeImageX: SCREEN_WIDTH,
@@ -453,7 +453,7 @@ export default function Settings() {
                 else if (currPageRef.current === "changePassword")
                     setPagePositions({
                         mainX: -SCREEN_WIDTH + displ,
-                        changeUsernameX: SCREEN_WIDTH,
+                        changeUserNameX: SCREEN_WIDTH,
                         changeEmailX: SCREEN_WIDTH,
                         changePasswordX: displ,
                         changeImageX: SCREEN_WIDTH,
@@ -463,7 +463,7 @@ export default function Settings() {
                 else if (currPageRef.current === "changeImage")
                     setPagePositions({
                         mainX: -SCREEN_WIDTH + displ,
-                        changeUsernameX: SCREEN_WIDTH,
+                        changeUserNameX: SCREEN_WIDTH,
                         changeEmailX: SCREEN_WIDTH,
                         changePasswordX: SCREEN_WIDTH,
                         changeImageX: displ,
@@ -473,7 +473,7 @@ export default function Settings() {
                 else if (currPageRef.current === "deleteAccount")
                     setPagePositions({
                         mainX: -SCREEN_WIDTH + displ,
-                        changeUsernameX: SCREEN_WIDTH,
+                        changeUserNameX: SCREEN_WIDTH,
                         changeEmailX: SCREEN_WIDTH,
                         changePasswordX: SCREEN_WIDTH,
                         changeImageX: SCREEN_WIDTH,
@@ -483,7 +483,7 @@ export default function Settings() {
                 else if (currPageRef.current === "camera")
                     setPagePositions({
                         mainX: -SCREEN_WIDTH,
-                        changeUsernameX: SCREEN_WIDTH,
+                        changeUserNameX: SCREEN_WIDTH,
                         changeEmailX: SCREEN_WIDTH,
                         changePasswordX: SCREEN_WIDTH,
                         changeImageX: -SCREEN_WIDTH + displ,
@@ -648,7 +648,7 @@ export default function Settings() {
                                     Delete Account
                                 </div>
 
-                                <div className="button lower closer" onClick={showChangeUsernameScreen}>
+                                <div className="button lower closer" onClick={showChangeUserNameScreen}>
                                     Change Name
                                 </div>
 
@@ -672,21 +672,21 @@ export default function Settings() {
                     </Glass>
                 </animated.div>
 
-                <animated.div className="section changeUsername" style={{ x: pagePositions.changeUsernameX }} {...gestureBind()}>
+                <animated.div className="section changeUserName" style={{ x: pagePositions.changeUserNameX }} {...gestureBind()}>
                     <Glass style={{ minHeight: "67%" }}>
                         <SVG className="logo small" src={UserIcon} />
 
-                        <form autoComplete="off" noValidate spellCheck="false" onSubmit={onChangeUsername}>
+                        <form autoComplete="off" noValidate spellCheck="false" onSubmit={onChangeUserName}>
                             <div className="inputContainer">
                                 <SVG className="inputIcon" src={UserIcon} />
                                 <input
                                     className="input"
                                     type="text"
                                     placeholder=" new name"
-                                    name="username"
-                                    value={changeUsernameForm.username}
-                                    onChange={onChangeUsernameFormChange}
-                                    autoComplete="off"
+                                    name="userName"
+                                    value={changeUserNameForm.userName}
+                                    onChange={onChangeUserNameFormChange}
+                                    autoComplete="new-password"
                                 ></input>
                             </div>
 
@@ -697,9 +697,9 @@ export default function Settings() {
                                     type="password"
                                     placeholder=" password"
                                     name="password"
-                                    value={changeUsernameForm.password}
-                                    onChange={onChangeUsernameFormChange}
-                                    autoComplete="off"
+                                    value={changeUserNameForm.password}
+                                    onChange={onChangeUserNameFormChange}
+                                    autoComplete="new-password"
                                 ></input>
                             </div>
 
@@ -707,7 +707,7 @@ export default function Settings() {
                                 Change Name
                             </button>
 
-                            <div className="error">{changeUsernameError}</div>
+                            <div className="error">{changeUserNameError}</div>
                         </form>
                     </Glass>
                 </animated.div>
@@ -726,7 +726,7 @@ export default function Settings() {
                                     name="email"
                                     value={changeEmailForm.email}
                                     onChange={onChangeEmailFormChange}
-                                    autoComplete="off"
+                                    autoComplete="new-password"
                                 ></input>
                             </div>
 
@@ -739,7 +739,7 @@ export default function Settings() {
                                     name="password"
                                     value={changeEmailForm.password}
                                     onChange={onChangeEmailFormChange}
-                                    autoComplete="off"
+                                    autoComplete="new-password"
                                 ></input>
                             </div>
 
@@ -765,7 +765,7 @@ export default function Settings() {
                                     name="newPassword"
                                     value={changePasswordForm.newPassword}
                                     onChange={onChangePasswordFormChange}
-                                    autoComplete="off"
+                                    autoComplete="new-password"
                                 ></input>
                             </div>
 
@@ -778,7 +778,7 @@ export default function Settings() {
                                     name="password"
                                     value={changePasswordForm.password}
                                     onChange={onChangePasswordFormChange}
-                                    autoComplete="off"
+                                    autoComplete="new-password"
                                 ></input>
                             </div>
 
@@ -805,7 +805,7 @@ export default function Settings() {
                                     name="password"
                                     value={changeImageForm.password}
                                     onChange={onChangeImageFormChange}
-                                    autoComplete="off"
+                                    autoComplete="new-password"
                                 ></input>
                             </div>
 
@@ -832,7 +832,7 @@ export default function Settings() {
                                     name="password"
                                     value={deleteAccountForm.password}
                                     onChange={onDeleteAccountFormChange}
-                                    autoComplete="off"
+                                    autoComplete="new-password"
                                 ></input>
                             </div>
 

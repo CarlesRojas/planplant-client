@@ -2,6 +2,9 @@ import React from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
 // Pages
+import Plants from "pages/Plants";
+import JoinHome from "pages/JoinHome";
+import CreateHome from "pages/CreateHome";
 import Settings from "pages/Settings";
 import Home from "pages/Home";
 import Auth from "pages/Auth";
@@ -17,6 +20,21 @@ export default function App() {
 
             <Router>
                 <Switch>
+                    {/* ################################# */}
+                    {/*   PLANTS                          */}
+                    {/* ################################# */}
+                    <Route path="/plants" component={Plants} exact></Route>
+
+                    {/* ################################# */}
+                    {/*   JOIN HOME                       */}
+                    {/* ################################# */}
+                    <Route path="/joinHome" component={JoinHome} exact></Route>
+
+                    {/* ################################# */}
+                    {/*   CREATE HOME PAGE                */}
+                    {/* ################################# */}
+                    <Route path="/createHome" component={CreateHome} exact></Route>
+
                     {/* ################################# */}
                     {/*   SETTINGS                        */}
                     {/* ################################# */}
