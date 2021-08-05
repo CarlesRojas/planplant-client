@@ -51,7 +51,9 @@ export default function Background() {
         window.PubSub.sub("onGradientChange", onGradientChange);
 
         // Unsubscribe on unmount
-        return () => {};
+        return () => {
+            window.PubSub.unsub("onGradientChange", onGradientChange);
+        };
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
